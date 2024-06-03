@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+message TimeStep {
+  uint64 time = 1;
+  repeated Robot robots = 2;
+  repeated Task tasks = 3;
+  optional uint64 points = 4;
+  optional double totalEnergy = 5;
+  optional double workEnergy = 6;
+  optional double connectorEnergy = 7;
+  optional double energyShared = 8;
+  optional uint64 workersDepleted = 9;
+  optional uint64 chargersDepleted = 10;
+  optional double energyLost = 11;
+}
+
+message Position {
+  double x = 1;
+  double y = 2;
+}
+
+message Orientation {
+  double w = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+}
+
+message Robot {
+  string name = 1;
+  uint64 teamID = 2;
+  enum State {
+    WORKER = 0;
+    CHARGER = 1;
+  }
+  State state = 3;
+  optional Position position = 4;
+  optional Orientation orientation = 5;
+  optional uint64 totalSent = 6;
+  optional uint64 totalReceived = 7;
+  optional string action = 8;
+  optional double energyLevel = 9;
+  enum MoveType {
+    MOVE_TO_WORK = 0;
+    MOVE_TO_CHARGE = 1;
+  }
+  optional MoveType moveType = 10;
+  optional bool isWorking = 11;
+  optional bool isCharging = 12;
+  optional bool isMoving = 13;
+}
+
+message Task {
+  string name = 1;
+  uint64 demand = 2;
+  optional uint64 requiredRobots = 3;
+  optional uint64 currentRobots = 4;
+  optional Position position = 5;
+  optional double radius = 6;
+}

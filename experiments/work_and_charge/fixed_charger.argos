@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="600"
+                ticks_per_second="10"
+random_seed='876' />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <!-- Controllers that use SCT -->
+
+    <worker_controller id="worker"
+                                        library="build/controllers/worker/libworker.so">
+      <actuators>
+        <differential_steering implementation="default" 
+                               factor_stddev="0.1"/>
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+      </actuators>
+      <sensors>
+        <proximity implementation="default" show_rays="false" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="false"/>
+        <ground implementation="rot_z_only" />
+        <battery implementation="default" />  
+        <positioning implementation="default" />    
+      </sensors>
+      <params>
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="12" />
+        <team_flocking target_distance="10"
+                  gain="1000"
+                  exponent="12" />
+        <traveler attract="1"
+                  repulse="1"
+                  obstacle="1" />
+        <SCT path="src/SCT_models/work_and_charge(worker)/supervisor.yaml" />
+        <!-- Battery sensor returns energy level in range [0, 1] -->
+        <energy low_thres="0.1" 
+                high_thres="0.99" 
+                share_dist="14" />
+      </params>
+    </worker_controller>
+
+    <charger_controller id="charger"
+                                        library="build/controllers/charger/libcharger.so">
+      <actuators>
+        <differential_steering implementation="default" 
+                               factor_stddev="0.1"/>
+        <range_and_bearing implementation="default" />
+        <leds implementation="default" medium="leds" />
+      </actuators>
+      <sensors>
+        <proximity implementation="default" show_rays="false" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="false"/>
+        <ground implementation="rot_z_only" />
+        <battery implementation="default" />   
+        <positioning implementation="default" />   
+      </sensors>
+      <params>
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="12" />
+        <team_flocking target_distance="10"
+                       gain="1000"
+                       exponent="12" />
+        <traveler attract="1"
+                  repulse="1"
+                  obstacle="1" />
+        <SCT path="src/SCT_models/work_and_charge(charger)/supervisor.yaml" />
+        <!-- Battery sensor returns energy level in range [0, 1] -->
+        <energy low_thres="0.1" 
+                high_thres="0.99" 
+                share_dist="14" />
+      </params>
+    </charger_controller>
+
+  </controllers>
+
+  <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+  <loop_functions library="build/loop_functions/leaderworker_loop_functions/libleaderworker_loop_functions"
+                  label="experiment_loop_functions_nop">
+
+    <!-- Output path -->
+    <output logging="true"
+            out_path="results/work_and_charge/static_0C_0E_001/"
+            frame_grabbing="false" 
+            camera_index="0" />
+
+    <!-- Things to draw in the qt-opengl visualization -->
+    <draw robot_label="true"/>
+
+    <!-- Charging area -->
+    <!-- <charging_area center="0.3"/> -->
+
+    <!-- Battery model -->
+    <!-- 1. Derived from BatteryDischargeModel class -->
+    <!-- 'start_charge' species the range at which the robot's energy will be randomly initialised with -->
+    <battery_model  discharge_model="fixed_time_motion" 
+                    full_charge_worker="100" 
+                    start_charge_worker="100,100"
+                    full_charge_charger="100" 
+                    start_charge_charger="100,100"
+                    delta_time="0.0"
+                    delta_pos_worker="0.1"
+                    delta_pos_charger="0.1"/>
+    <!-- 2. Extra battery model details about how the battery is charged/discharged -->
+    <extra_battery_info delta_work="0.1"
+                        delta_recharge="1"
+                        delta_transfer_loss="0"/>
+
+    <!-- Distribute workers and chargers -->
+    <distribute>
+      <!-- <position min="-0.7,-0.8" max="-0.8,0.8" /> -->
+      <e-puck controller="worker" num_robots="6"/>
+      <e-puck_charger controller="charger" num_robots="0"/>
+    </distribute>
+
+  </loop_functions>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="2.5, 2.5, 1" center="0,0,0.5">
+
+    <floor id="floor"
+           source="loop_functions"
+           pixels_per_meter="200" />
+
+    <box id="wall_west" size="0.05,1.7,0.2" movable="false">
+      <body position="-0.825,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.05,1.7,0.2" movable="false">
+      <body position="0.825,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_north" size="1.6,0.05,0.2" movable="false">
+      <body position="0,0.825,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="1.6,0.05,0.2" movable="false">
+      <body position="0,-0.825,0" orientation="0,0,0" />
+    </box>
+
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" check_occlusions="false"/>
+    <led id="leds" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <!--
+        This shows how to add customized key management
+        using the qt user functions.
+        Check 'argos3 -q qt-opengl' for more help.
+    -->
+  <visualization>
+    <qt-opengl autoplay="false">
+
+      <!-- <frame_grabbing directory="frames"
+                      base_name="frame_"
+                      format="png"
+                      quality="100"
+                      headless_grabbing="false"
+                      headless_frame_size="1600x1200"
+                      headless_frame_rate="1"/> -->
+
+      <user_functions library="build/loop_functions/leaderworker_loop_functions/libleaderworker_loop_functions"
+                      label="manualcontrol_qtuser_functions_nop" />
+
+      <camera>
+        <placements>
+          <placement index="0" position="0.0155856,-0.00519367,3.8988" look_at="0.0155856,-0.00519367,2.8988" up="0,1,0" lens_focal_length="58" />
+        </placements>
+      </camera>
+
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>
