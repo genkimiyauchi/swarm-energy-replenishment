@@ -3,9 +3,10 @@
 [**Installation**](#installation) | [**Usage**](#usage) | [**License**](#license)
 
 This repository contains the code for the paper submission to ANTS 2024:
+
 - A comparative study of energy replenishment strategies for robot swarms
 
-# Installation
+## Installation
 
 The following steps have been tested in Ubuntu 22, but it should be applicable to other Ubuntu distributions as well.
 
@@ -25,16 +26,16 @@ Install the [plugins](https://gitlab.com/genki_miyauchi/multi-human-swarm-contro
 ```bash
 git clone https://gitlab.com/genki_miyauchi/multi-human-swarm-control-plugins.git
 cd multi-human-swarm-control-plugins
-mkdir build 
+mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ../src
 make
 sudo make install
 ```
 
-After executing the above commands, you should see ```e-puck_charger``` and ```rectangle_task``` appear when using ```argos3 -q entities```
+After executing the above commands, you should see `e-puck_charger` and `rectangle_task` appear when using `argos3 -q entities`
 
-Once the plugins have been installed, you may delete the ```minimal-length-swarm-networks-plugins``` folder
+Once the plugins have been installed, you may delete the `minimal-length-swarm-networks-plugins` folder
 
 ### Install protobuf
 
@@ -49,7 +50,8 @@ make -j$(nproc)
 sudo make install
 sudo ldconfig
 ```
-Once the protobuf compiler is successfully installed, you should be able to run ```protoc``` in the terminal.
+
+Once the protobuf compiler is successfully installed, you should be able to run `protoc` in the terminal.
 
 ### Python dependencies
 
@@ -61,7 +63,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# Usage
+## Usage
 
 ### Build the project
 
@@ -83,7 +85,8 @@ argos3 -c experiments/work_and_charge/fixed_charger.argos
 argos3 -c experiments/work_and_charge/mobile_charger.argos
 ```
 
-For running batch simulation trials, configure and execute ```run_simulations.sh```.
+For running batch simulation trials, configure and execute `run_simulations.sh`.
 
-# License
+## License
+
 The code in this repository is released under the terms of the MIT license.
