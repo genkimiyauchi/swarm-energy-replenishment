@@ -2,9 +2,9 @@
 
 [**Installation**](#installation) | [**Usage**](#usage) | [**License**](#license)
 
-This repository contains the code for the paper submission to ANTS 2024:
+This repository contains the code for the paper presented at ANTS 2024:
 
-- A comparative study of energy replenishment strategies for robot swarms
+- [A Comparative Study of Energy Replenishment Strategies for Robot Swarms](https://doi.org/10.1007/978-3-031-70932-6_1)
 
 ## Installation
 
