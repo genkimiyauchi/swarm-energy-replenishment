@@ -4,7 +4,7 @@
 
 This repository contains the code for the following papers:
 
-- On the Duty Cycle and Energy Efficiency of Energy-Sharing Robot Swarms submitted to ANTS2026.
+- Optimal Performance of Cooperative Energy-Replenishment in Robot Swarms submitted to DARS 2026.
 - [A Comparative Study of Energy Replenishment Strategies for Robot Swarms](https://doi.org/10.1007/978-3-031-70932-6_1) presented at ANTS2024 (tag: [ANTS2024](https://github.com/genkimiyauchi/swarm-energy-replenishment/tree/ANTS2024)).
 
 ## Installation
