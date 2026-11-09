@@ -3,6 +3,10 @@
 This repository contains the code for the analytical model and derived predicitions and comparisons presented in the paper
 "Optimal Performance of Cooperative Energy-Replenishment in Robot Swarms" that was submitted to DARS 2026.
 
+The following video gives a short introduction to the paper:
+
+<video src="media/DARS2026_Supplementary_Video.mp4" controls width="100%"></video>
+
 ## Installing Python dependencies
 
 To run the scripts in this directory, install the Python dependencies in requirements.txt using your choice of virtual environment. Here, we assume using venv:
@@ -37,6 +41,10 @@ This script:
 - plots feasible regions for the specified configurations.
 
 To use custom simulation data, update the log file paths in the plotting function calls.
+
+The following video shows a simulation run with supercapacitors for the parameters $(\tau, \zeta, \eta, d_\mathrm{comm}) = (5, 5, 1, 40)$ (10x speed):
+
+<video src="media/mobile_supercap_tau5_zeta5_eta1.00_dcomm40_001_10x.mp4" controls width="100%"></video>
 
 ### Comparing the model to the optimizers
 To compare the analytical model with the optimizers **SciPy (`trust-constr`)** and **Ipopt (via CasADi)**, run:
