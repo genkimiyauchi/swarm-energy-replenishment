@@ -487,5 +487,5 @@ def plot_CS_polygon_grid(param_list):
 
     plt.tight_layout()
     plt.subplots_adjust(top=0.85)
-    #plt.savefig("all_cases_figure.png", dpi=300, bbox_inches='tight')
+    plt.savefig("all_cases_figure.pdf", dpi=1200, bbox_inches='tight')
     plt.show()

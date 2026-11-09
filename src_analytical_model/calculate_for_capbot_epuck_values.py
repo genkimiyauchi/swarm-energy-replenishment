@@ -180,7 +180,7 @@ for k, eta in enumerate(eta_values):
 cbar = figure.colorbar(pcm, ax=axis, orientation='vertical', pad=0.015)
 cbar.set_label('Ratio of Work (CS. / IS.)', fontsize=12)
 
-#plt.savefig("ratio_plot_stretched.png", dpi=300, bbox_inches='tight', pad_inches=0.05)
+plt.savefig("ratio_plot_stretched.pdf", dpi=1200, bbox_inches='tight', pad_inches=0.05)
 plt.show()
 
 
@@ -278,7 +278,7 @@ handles, labels = ax1.get_legend_handles_labels()
 fig.legend(handles, labels, loc='upper center', ncol=4, fontsize=14, frameon=False)
 
 plt.tight_layout(rect=[0.01, 0, 0.99, 0.9])  
-#plt.savefig("combined_plots.png", dpi=300, bbox_inches='tight', pad_inches=0.05)
+plt.savefig("combined_plots.pdf", dpi=1200, bbox_inches='tight', pad_inches=0.05)
 plt.show()
 
 
@@ -433,7 +433,7 @@ fig.legend(
 
 
 plt.tight_layout(rect=[0, 0, 1, 0.83])  
-#plt.savefig("combined_alpha_beta_regions_compact.png", dpi=300, bbox_inches='tight', pad_inches=0.05)
+plt.savefig("combined_alpha_beta_regions_compact.pdf", dpi=1200, bbox_inches='tight', pad_inches=0.05)
 plt.show()
 
 

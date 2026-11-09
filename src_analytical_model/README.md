@@ -25,7 +25,8 @@ The script `calculate_functions.py` provides implementations of:
 Example usage is demonstrated in the scripts below.
 
 ### Comparing the model to simulation results
-To compare analytical results with simulation data, run:
+
+To compare the analytical results with simulation data, the simulation data for the considered scenarios must be generated first. To do so, follow the [README in the parent directory](../README.md) and adapt the configuration parameters in [`run_simulation.sh`](../experiments/work_and_charge/run_simulation.sh) accordingly. Then, run:
 
 ```bash
 python3 analytical_vs_simulations.py

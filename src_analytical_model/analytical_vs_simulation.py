@@ -9,6 +9,8 @@ CASE2 = 2 # charger fully charged, charger rests
 CASE3 = 3 # workers fully charged, workers rest
 CASE4 = 4 # workers fully charged, charger rests
 
+SIMULATION_RESULT_PATH = "../results/work_and_charge/"
+
 # distance = 500.0 # (cm) distance between charging and work locations
 # speed = 12.0 #(cm/s) robot speed
 #eta = 2.0
@@ -101,17 +103,17 @@ freqs = dict(zip(values, counts))
 
 
 #### Compare the simulation results with the analytical results
-cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=40, nu_work=1*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=5, zeta=5, n_c=1, simulation_result_log_file="results_2025-11-20/mobile_supercap_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb")
-cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_bat_value, delta_commute=40, nu_work=1*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_bat_value, nu_transfer=nu_charge_bat_value, xi=0.99, tau=5, zeta=5, n_c=1, simulation_result_log_file="results_2025-11-20/mobile_battery_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb")
-cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=190, nu_work=8*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=3, zeta=4, n_c=1, simulation_result_log_file="results_2025-11-20/mobile_supercap_tau3_zeta4_eta8.00_dcomm190_001/log_data.pb")
-cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=290, nu_work=5*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=7, zeta=3, n_c=1, simulation_result_log_file="results_2025-11-20/mobile_supercap_tau7_zeta3_eta5.00_dcomm290_001/log_data.pb")
-cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=140, nu_work=7*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=8, zeta=2, n_c=1, simulation_result_log_file="results_2025-11-20/mobile_supercap_tau8_zeta2_eta7.00_dcomm140_001/log_data.pb")
+cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=40, nu_work=1*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=5, zeta=5, n_c=1, simulation_result_log_file=SIMULATION_RESULT_PATH + "mobile_supercap_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb")
+cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_bat_value, delta_commute=40, nu_work=1*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_bat_value, nu_transfer=nu_charge_bat_value, xi=0.99, tau=5, zeta=5, n_c=1, simulation_result_log_file=SIMULATION_RESULT_PATH + "mobile_battery_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb")
+cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=190, nu_work=8*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=3, zeta=4, n_c=1, simulation_result_log_file=SIMULATION_RESULT_PATH + "mobile_supercap_tau3_zeta4_eta8.00_dcomm190_001/log_data.pb")
+cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=290, nu_work=5*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=7, zeta=3, n_c=1, simulation_result_log_file=SIMULATION_RESULT_PATH + "mobile_supercap_tau7_zeta3_eta5.00_dcomm290_001/log_data.pb")
+cf.calculate_and_plot_scenario_with_log_file(q_w_max=q_cap_value, delta_commute=140, nu_work=7*nu_commute_value, nu_move=nu_commute_value, nu_min=nu_min_value, nu_charge=nu_charge_cap_value, nu_transfer=nu_charge_cap_value, xi=0.5, tau=8, zeta=2, n_c=1, simulation_result_log_file=SIMULATION_RESULT_PATH + "mobile_supercap_tau8_zeta2_eta7.00_dcomm140_001/log_data.pb")
 cf.calculate_and_plot_scenario_with_multiple_log_files_test(q_w_max_list=[q_cap_value, q_bat_value],
     delta_commute_list=[40, 40], nu_work_list=[1*nu_commute_value, 1*nu_commute_value], nu_move_list=[nu_commute_value, nu_commute_value],
     nu_min_list=[nu_min_value, nu_min_value], nu_charge_list=[nu_charge_cap_value, nu_charge_bat_value], nu_transfer_list=[nu_charge_cap_value, nu_charge_bat_value],
     xi_list=[0.5, 0.99], tau_list=[5, 5], zeta_list=[5, 5], n_c_list=[1, 1],
-    simulation_result_log_files=["results_2025-11-20/mobile_supercap_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb",
-                                 "results_2025-11-20/mobile_battery_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb"], labels=["Supercap.", "Battery"])
+    simulation_result_log_files=[SIMULATION_RESULT_PATH + "mobile_supercap_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb",
+                                 SIMULATION_RESULT_PATH + "mobile_battery_tau5_zeta5_eta1.00_dcomm40_001/log_data.pb"], labels=["Supercap.", "Battery"])
 
 # ----------------------------
 # Example plots
